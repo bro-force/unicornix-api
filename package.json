@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node src/app.js"
+    "start": "node src/app.js",
+    "lint": "eslint src/**/*.js"
   },
   "keywords": [],
   "author": "",
@@ -15,5 +16,8 @@
     "dotenv": "^5.0.1",
     "express": "^4.16.3",
     "firebase-admin": "^5.12.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1"
   }
 }
