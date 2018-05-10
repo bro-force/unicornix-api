@@ -1,16 +1,21 @@
 const fetchAndStoreReviews = require('../database-controllers/fetchAndStoreReviews')
 
 module.exports = (req, res) => {
-  console.log(new Date(), 'Fetching new reviews')
+  /* eslint-disable-next-line */
+  console.info(new Date(), 'Fetching new reviews')
 
   return fetchAndStoreReviews()
     .then(responses => responses.length)
     .then(newReviewsCount => {
-      console.log(new Date(), newReviewsCount, 'new reviews')
+      /* eslint-disable-next-line */
+      console.info(new Date(), newReviewsCount, 'new reviews')
 
       res.status(200).json({ newReviews: newReviewsCount })
     })
     .catch(error => {
+      /* eslint-disable-next-line */
+      console.error(error)
+
       return res.status(500).json(error)
     })
 }
