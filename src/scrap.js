@@ -5,12 +5,12 @@ const spreadsheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQF0qr21
 
 const getSpreadsheet = () => axios.get(spreadsheetUrl)
 
-const getData = (response) => {
+const getData = (start = 0) => (response) => {
   const $ = cheerio.load(response.data)
   const reviews = []
 
   $('#sheets-viewport table > tbody tr').each((i, element) => {
-    const line = $(element).children().eq(0).text()
+    const line = Number($(element).children().eq(0).text())
     const date = $(element).children().eq(1).text()
     const company = $(element).children().eq(2).text()
     const city = $(element).children().eq(4).text()
@@ -30,7 +30,7 @@ const getData = (response) => {
       review.company !== '' &&
       review.comment !== ''
 
-    if (isValid) {
+    if (isValid && review.line > start) {
       reviews.push(review)
     }
   })
@@ -38,9 +38,9 @@ const getData = (response) => {
   return reviews
 }
 
-const scrap = () => {
+const scrap = (start) => {
   return getSpreadsheet()
-    .then(getData)
+    .then(getData(start))
 }
 
 module.exports = scrap
