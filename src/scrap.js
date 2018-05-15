@@ -1,5 +1,6 @@
 const axios = require('axios')
 const cheerio = require('cheerio')
+const nameReplacer = require('./../helpers/nameReplacer')
 
 const spreadsheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQF0qr21v5Hw8C0rHGxkVcI-dgeXFoOWLjv0DwoKyvgSVPrEH-uZg7Csa48i35oUZL8pTvI0UgykTyC/pubhtml'
 
@@ -32,6 +33,7 @@ const getData = (start = 0) => (response) => {
       review.comment !== ''
 
     if (isValid && review.line > start) {
+      review.comment = nameReplacer(review)
       reviews.push(review)
     }
   })
