@@ -26,6 +26,7 @@ const getData = (start = 0) => (response) => {
 
     const isValid =
       review.date !== '' &&
+      review.date !== 'aviso' &&
       review.city !== '' &&
       review.company !== '' &&
       review.comment !== ''
@@ -40,7 +41,7 @@ const getData = (start = 0) => (response) => {
 
 const scrap = (start) => {
   return getSpreadsheet()
-    .then(getData(start))
+    .then(getData(1))
 }
 
 module.exports = scrap
