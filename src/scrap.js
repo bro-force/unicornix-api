@@ -43,7 +43,7 @@ const getData = (start = 0) => (response) => {
 
 const scrap = (start) => {
   return getSpreadsheet()
-    .then(getData(1))
+    .then(getData(start))
 }
 
 module.exports = scrap
